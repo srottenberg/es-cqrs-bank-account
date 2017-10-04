@@ -1,0 +1,12 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+GET         /                               controllers.ApplicationController.index
+
+POST        /accounts                       controllers.AccountController.create
+GET         /accounts                       controllers.AccountController.list
+GET         /accounts/:id                   controllers.AccountController.get(id)
+
+POST        /accounts/:id/deposit           controllers.AccountController.deposit(id, amount: Double)
