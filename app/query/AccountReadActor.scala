@@ -19,10 +19,10 @@ class AccountReadActor extends Actor {
   val accountStore = mutable.Map[String, AccountState]()
 
   def receive = {
-    case AccountEvent(_, accountId, command) =>
-      val currentAccount = accountStore.getOrElse(accountId, EmptyAccountState)
-      val updatedAccount = AccountHandlers.handle(currentAccount, command).right.get // safe because events are validated
-      accountStore.put(accountId, updatedAccount)
+    case event: AccountEvent =>
+      val currentAccount = accountStore.getOrElse(event.accountId, EmptyAccountState)
+      val updatedAccount = AccountHandlers.applyEvent(currentAccount, event)
+      accountStore.put(event.accountId, updatedAccount)
     case Get(accountId) =>
       sender() ! accountStore.get(accountId)
     case GetAll =>
