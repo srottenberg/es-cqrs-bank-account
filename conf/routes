@@ -10,3 +10,4 @@ GET         /accounts                       controllers.AccountController.list
 GET         /accounts/:id                   controllers.AccountController.get(id)
 
 POST        /accounts/:id/deposit           controllers.AccountController.deposit(id, amount: Double)
+POST        /accounts/:id/withdraw          controllers.AccountController.withdraw(id, amount: Double)

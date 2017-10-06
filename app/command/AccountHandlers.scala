@@ -12,10 +12,20 @@ object AccountHandlers {
         Right(
           AccountCreatedEvent(UUID.randomUUID().toString, id, command)
         )
-      case (OpenAccountState(id, _), DepositCommand(amount)) =>
+      case (OpenAccountState(id, _), DepositCommand(amount)) if amount > 0 =>
         Right(
           AmountAddedEvent(UUID.randomUUID().toString, id, amount, command)
         )
+      case (OpenAccountState(id, balance), WithdrawalCommand(amount)) if amount > 0 =>
+        if (balance - amount >= 0) {
+          Right(
+            AmountAddedEvent(UUID.randomUUID().toString, id, amount * -1, command)
+          )
+        } else {
+          Left(
+            AccountError(s"Withdrawal not authorized, not enough money!")
+          )
+        }
       case _ =>
         Left(AccountError(s"Unhandled command $command for state ${currentState.getClass.getSimpleName}"))
     }
