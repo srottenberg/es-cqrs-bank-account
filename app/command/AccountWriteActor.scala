@@ -27,7 +27,7 @@ class AccountWriteActor(queue: SourceQueueWithComplete[AccountEvent]) extends Ac
           queue.offer(event)
           sender() ! Right(())
         case Left(error) =>
-          sender() ! error
+          sender() ! Left(error)
       }
 
   }
