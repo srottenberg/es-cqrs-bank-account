@@ -7,7 +7,7 @@ import java.util.UUID
 import play.api.libs.json.Json
 import play.api.mvc.{BaseController, ControllerComponents}
 
-import command.{AccountCommandService, CreateAccountCommand, DepositCommand, WithdrawalCommand}
+import command.{AccountCommandService, CloseAccountCommand, CreateAccountCommand, DepositCommand, WithdrawalCommand}
 import query.AccountQueryService
 
 class AccountController(
@@ -50,6 +50,14 @@ class AccountController(
 
   def withdraw(id: String, amount: Double) = Action.async {
     val command = WithdrawalCommand(amount)
+    accountCommandService.sendCommand(id, command).map {
+      case Right(_) => Ok
+      case Left(error) => BadRequest(error.message)
+    }
+  }
+
+  def close(id: String) = Action.async {
+    val command = CloseAccountCommand
     accountCommandService.sendCommand(id, command).map {
       case Right(_) => Ok
       case Left(error) => BadRequest(error.message)

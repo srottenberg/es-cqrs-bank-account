@@ -10,3 +10,4 @@ sealed trait AccountEvent {
 
 case class AccountCreatedEvent(id: String, accountId: String, command: AccountCommand) extends AccountEvent
 case class AmountAddedEvent(id: String, accountId: String, amount: Double, command: AccountCommand) extends AccountEvent
+case class AccountClosedEvent(id: String, accountId: String, command: AccountCommand) extends AccountEvent

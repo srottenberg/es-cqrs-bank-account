@@ -2,7 +2,7 @@ package command
 
 import java.util.UUID
 
-import domain.{AccountState, EmptyAccountState, OpenAccountState}
+import domain.{AccountState, ClosedAccountState, EmptyAccountState, OpenAccountState}
 
 object AccountHandlers {
 
@@ -26,6 +26,16 @@ object AccountHandlers {
             AccountError(s"Withdrawal not authorized, not enough money!")
           )
         }
+      case (OpenAccountState(id, balance), CloseAccountCommand) =>
+        if (balance == 0) {
+          Right(
+            AccountClosedEvent(UUID.randomUUID().toString, id, command)
+          )
+        } else {
+          Left(
+            AccountError("Could not close not empty account!")
+          )
+        }
       case _ =>
         Left(AccountError(s"Unhandled command $command for state ${currentState.getClass.getSimpleName}"))
     }
@@ -37,6 +47,8 @@ object AccountHandlers {
       case (account: OpenAccountState, AmountAddedEvent(_, _, amount, _)) =>
         val newBalance  = account.balance + amount
         account.copy(balance = newBalance)
+      case (account: OpenAccountState, _: AccountClosedEvent) =>
+        ClosedAccountState(account.id)
       case _ => throw new IllegalStateException(s"Could not apply event ${event.id}")
     }
 

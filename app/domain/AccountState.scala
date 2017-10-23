@@ -16,3 +16,4 @@ object NonEmptyAccountState {
 }
 
 case class OpenAccountState(id: String, balance: Double) extends NonEmptyAccountState
+case class ClosedAccountState(id: String) extends NonEmptyAccountState
