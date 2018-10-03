@@ -1,0 +1,170 @@
+{
+	"info": {
+		"name": "BankAccount",
+		"_postman_id": "096e90cf-3fc6-0d19-d4dd-7d78ced9d6b2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9000/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"accounts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List accounts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bcd824bc-cef2-41a8-89b0-9acc35273d08",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9000/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"accounts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get account details",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bcd824bc-cef2-41a8-89b0-9acc35273d08",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9000/accounts/{{accountId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"accounts",
+						"{{accountId}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit into account",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bcd824bc-cef2-41a8-89b0-9acc35273d08",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9000/accounts/{{accountId}}/deposit?amount=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"accounts",
+						"{{accountId}}",
+						"deposit"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "100",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dab1afc8-2bd6-4c05-8d09-343fb5bffdf2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d14fec55-2f90-4994-b240-5914fcfdf845",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e3ca2051-9682-4651-bec1-31180785c2d2",
+			"key": "accountId",
+			"value": "",
+			"type": "text"
+		}
+	]
+}
